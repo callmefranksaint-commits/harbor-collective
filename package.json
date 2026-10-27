@@ -1,0 +1,1 @@
+{"description":"Harbor Collective — private multi-user web app for a small trading group","engines":{"node":">=18"},"name":"harbor-collective","private":true,"scripts":{"start":"node server.js"},"version":"1.0.0"}

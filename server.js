@@ -26,7 +26,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
-const DATA_FILE = path.join(__dirname, 'data.json');
+const DATA_FILE = process.env.DATA_FILE ? path.join(__dirname, process.env.DATA_FILE) : path.join(__dirname, 'data.json');
 // In production set HARBOR_SECRET to a long random value so session
 // signatures stay stable across restarts. Sessions live in memory and are
 // invalidated on restart regardless.
@@ -51,6 +51,7 @@ function loadStore() {
 }
 let store = loadStore();
 function saveStore() {
+  fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   const tmp = DATA_FILE + '.tmp';
   fs.writeFileSync(tmp, JSON.stringify(store, null, 2));
   fs.renameSync(tmp, DATA_FILE);
